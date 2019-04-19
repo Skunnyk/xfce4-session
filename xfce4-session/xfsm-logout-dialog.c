@@ -51,7 +51,6 @@
 #include <xfce4-session/xfsm-logout-dialog.h>
 #include <xfce4-session/xfsm-fadeout.h>
 #include <xfce4-session/xfsm-global.h>
-#include <xfce4-session/xfsm-legacy.h>
 #include <xfce4-session/xfsm-error.h>
 
 #ifdef GDK_WINDOWING_X11

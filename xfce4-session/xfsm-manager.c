@@ -61,7 +61,6 @@
 #include <xfce4-session/xfsm-chooser-icon.h>
 #include <xfce4-session/xfsm-chooser.h>
 #include <xfce4-session/xfsm-global.h>
-#include <xfce4-session/xfsm-legacy.h>
 #include <xfce4-session/xfsm-startup.h>
 #include <xfce4-session/xfsm-marshal.h>
 #include <xfce4-session/xfsm-error.h>
@@ -567,9 +566,6 @@ xfsm_manager_load_session (XfsmManager *manager)
 
   xfsm_verbose ("Finished loading clients from rc file\n");
 
-  /* load legacy applications */
-  xfsm_legacy_load_session (rc);
-
   xfce_rc_close (rc);
 
   return g_queue_peek_head (manager->pending_properties) != NULL;
@@ -736,9 +732,6 @@ xfsm_manager_restart (XfsmManager *manager)
 
   g_assert (manager->session_name != NULL);
 
-  /* setup legacy application handling */
-  xfsm_legacy_init ();
-
   /* tell splash screen that the session is starting now */
   preview = xfsm_load_session_preview (manager->session_name);
   if (preview == NULL)
@@ -778,8 +771,6 @@ xfsm_manager_signal_startup_done (XfsmManager *manager)
       xfsm_manager_restore_active_workspace (manager, rc);
       xfce_rc_close (rc);
 
-      /* start legacy applications now */
-      xfsm_legacy_startup ();
     }
 }
 
@@ -1215,10 +1206,6 @@ xfsm_manager_save_yourself_global (XfsmManager     *manager,
                           shutdown
                           ? XFSM_MANAGER_SHUTDOWN
                           : XFSM_MANAGER_CHECKPOINT);
-
-  /* handle legacy applications first! */
-  if (manager->save_session)
-      xfsm_legacy_perform_session_save ();
 
   for (lp = g_queue_peek_nth_link (manager->running_clients, 0);
        lp;
@@ -1808,9 +1795,6 @@ xfsm_manager_store_session (XfsmManager *manager)
     }
 
   xfce_rc_write_int_entry (rc, "Count", count);
-
-  /* store legacy applications state */
-  xfsm_legacy_store_session (rc);
 
   /* store current workspace numbers */
   display = gdk_display_get_default ();

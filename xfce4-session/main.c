@@ -363,11 +363,6 @@ main (int argc, char **argv)
       g_error_free (error);
     }
 
-  /* fake a client id for the manager, so the legacy management does not
-   * recognize us to be a session client.
-   */
-  gdk_x11_set_sm_client_id (xfsm_generate_client_id (NULL));
-
   xfsm_dbus_init (manager);
 
   gtk_main ();

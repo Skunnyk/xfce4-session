@@ -70,7 +70,6 @@
 #include <xfce4-session/xfsm-consolekit.h>
 #include <xfce4-session/xfsm-fadeout.h>
 #include <xfce4-session/xfsm-global.h>
-#include <xfce4-session/xfsm-legacy.h>
 #include <xfce4-session/xfsm-systemd.h>
 #include <xfce4-session/xfsm-shutdown-fallback.h>
 

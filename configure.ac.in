@@ -220,11 +220,6 @@ echo
 echo "Build Configuration:"
 echo
 echo " * Debugging support:              $enable_debug"
-if test x"$enable_legacy_sm" = x"yes"; then
-echo " * Legacy session management:      yes"
-else
-echo " * Legacy session management:      no"
-fi
 echo " * Backend:                        ${with_backend}"
 
 echo
