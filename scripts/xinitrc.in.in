@@ -85,7 +85,7 @@ if command -v xfce4-session >/dev/null 2>&1; then
   # required for starting from a console, not a login manager
   if test "x$XFCE4_SESSION_WITH_CK" = "x1"; then
     if command -v ck-launch-session >/dev/null 2>&1; then
-      ck-launch-session xfce4-session
+      exec ck-launch-session xfce4-session
     else
       echo
       echo "You have tried to start Xfce with consolekit support, but"
@@ -97,10 +97,11 @@ if command -v xfce4-session >/dev/null 2>&1; then
     fi
   else
     # start xfce4-session normally
-    xfce4-session
+    exec xfce-session
   fi
 
-  exit 0
+  # if we got here, then exec failed
+  exit 1
 fi
 
 ##################
