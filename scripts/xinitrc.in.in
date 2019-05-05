@@ -132,7 +132,7 @@ xsetroot -solid black -cursor_name watch
 # or use old-fashioned startup script otherwise
 
 xfsettingsd &
-xfwm4 --daemon
+xfwm4 &
 
 # start up stuff in $XDG_CONFIG_HOME/autostart/
 if test -d "$XDG_CONFIG_HOME/autostart"; then
@@ -157,8 +157,7 @@ if test -d "$XDG_CONFIG_HOME/autostart"; then
   done
 fi
 
-xfdesktop&
-orage &
+xfdesktop &
 
 panel=`command -v xfce4-panel`
 case "x$panel" in
